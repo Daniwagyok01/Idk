@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Error - Virus Detected</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 60px;
+            animation: blink 1s infinite;
+        }
+        h2 {
+            font-size: 40px;
+            margin: 20px 0;
+        }
+        p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        #dvd {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-image: url('dvd-logo.png'); /* Replace with actual DVD logo image */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0); }
+        }
+    </style>
+    <script>
+        function pressF11() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        function openFile() {
+            // Open the local file
+            window.open('file:///C:/Users/user/Documents/Dani/Code%20Things/screensaver.html', '_blank'); // Use relative path
+        }
+
+        function playAlertSound() {
+            const audio = new Audio('Danger Alarm Sound Effect.mp3'); // Replace with the path to your alert sound
+            audio.play();
+        }
+
+        window.onload = function() {
+            // Add an event listener to the body to request fullscreen on click
+            document.body.addEventListener('click', function() {
+                pressF11();
+                playAlertSound(); // Play sound on click
+            });
+
+            // Open the file after 15 seconds
+            setTimeout(openFile, 15000); // 15000 milliseconds = 15 seconds
+
+            // Start the DVD logo animation
+            moveDVD();
+        };
+
+        const dvd = document.createElement('div');
+        dvd.id = 'dvd';
+        document.body.appendChild(dvd);
+        let posX = Math.random() * (window.innerWidth - 100);
+        let posY = Math.random() * (window.innerHeight - 50);
+        let deltaX = 2;
+        let deltaY = 2;
+
+        function moveDVD() {
+            if (posX + deltaX > window.innerWidth - 100 || posX + deltaX < 0) {
+                deltaX = -deltaX;
+            }
+            if (posY + deltaY > window.innerHeight - 50 || posY + deltaY < 0) {
+                deltaY = -deltaY;
+            }
+            posX += deltaX;
+            posY += deltaY;
+            dvd.style.left = posX + 'px';
+            dvd.style.top = posY + 'px';
+            requestAnimationFrame(moveDVD);
+        }
+    </script>
+</head>
+<body>
+    <h1>CRITICAL ERROR!</h1>
+    <h2>Virus Detected!</h2>
+    <p>Your computer has been infected with a dangerous virus.</p>
+    <p>All your personal files are at risk!</p>
+    <p>Pay Us $69,420 To Receive Back Your Files!</p>
+    <p>After 15 seconds Your Computer Is Gonna Be Destroyed!</p>
+</body>
+</html>
