@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVD Logo Screensaver</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        #dvd {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-image: url('dvd-logo.png'); /* Replace with actual DVD logo image */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        #windows-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background-image: url('windows10-logo.png'); /* Replace with actual Windows 10 logo image */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div id="dvd"></div>
+    <div id="windows-logo"></div>
+    <script>
+        const dvd = document.getElementById('dvd');
+        let posX = Math.random() * (window.innerWidth - 100);
+        let posY = Math.random() * (window.innerHeight - 50);
+        let deltaX = 2;
+        let deltaY = 2;
+
+        function moveDVD() {
+            if (posX + deltaX > window.innerWidth - 100 || posX + deltaX < 0) {
+                deltaX = -deltaX;
+            }
+            if (posY + deltaY > window.innerHeight - 50 || posY + deltaY < 0) {
+                deltaY = -deltaY;
+            }
+            posX += deltaX;
+            posY += deltaY;
+            dvd.style.left = posX + 'px';
+            dvd.style.top = posY + 'px';
+            requestAnimationFrame(moveDVD);
+        }
+        moveDVD();
+    </script>
+</body>
+</html>
